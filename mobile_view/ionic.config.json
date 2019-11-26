@@ -1,0 +1,7 @@
+{
+  "name": "ninja_budget",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}
