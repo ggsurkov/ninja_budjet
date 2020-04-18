@@ -4,9 +4,10 @@
 /mobile_view/www
 /mobile_view/plugins
 /mobile_view/resources
+/mobile_view/platforms
 
 # dependencies
-/node_modules
+/mobile_view/node_modules
 
 # IDEs and editors
 /.idea

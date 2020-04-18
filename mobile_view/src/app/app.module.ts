@@ -3,11 +3,13 @@ import {BrowserModule} from '@angular/platform-browser';
 import {RouteReuseStrategy} from '@angular/router';
 
 import {IonicModule, IonicRouteStrategy} from '@ionic/angular';
-import {SplashScreen} from '@ionic-native/splash-screen/ngx';
-import {StatusBar} from '@ionic-native/status-bar/ngx';
+import {SplashScreen} from '@ionic-native/splash-screen';
+import {StatusBar} from '@ionic-native/status-bar';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
+
+import {Keyboard} from '@ionic-native/keyboard';
 
 @NgModule({
     declarations: [AppComponent],
@@ -16,6 +18,7 @@ import {AppComponent} from './app.component';
     providers: [
         StatusBar,
         SplashScreen,
+        Keyboard,
         {provide: RouteReuseStrategy, useClass: IonicRouteStrategy}
     ],
     bootstrap: [AppComponent]

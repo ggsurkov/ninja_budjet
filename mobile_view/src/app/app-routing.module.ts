@@ -15,10 +15,6 @@ const routes: Routes = [
         loadChildren: () => import('./pages/my-goal/my-goal.module').then(m => m.MyGoalPageModule)
     },
     {
-        path: 'history',
-        loadChildren: () => import('./pages/history/history.module').then(m => m.HistoryPageModule)
-    },
-    {
         path: 'family-qr-code',
         loadChildren: () => import('./pages/family-qr-code/family-qr-code.module').then(m => m.FamilyQrCodePageModule)
     },

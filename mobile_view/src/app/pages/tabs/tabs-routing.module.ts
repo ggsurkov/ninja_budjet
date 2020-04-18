@@ -18,12 +18,12 @@ const routes: Routes = [
                 ]
             },
             {
-                path: 'note-tab',
+                path: 'history-tab',
                 children: [
                     {
                         path: '',
                         loadChildren: () =>
-                            import('./note-tab/note-tab.module').then(m => m.Tab2PageModule)
+                            import('./history-tab/history-tab.module').then(m => m.Tab2PageModule)
                     }
                 ]
             },

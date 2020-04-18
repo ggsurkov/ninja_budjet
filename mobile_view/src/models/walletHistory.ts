@@ -1,0 +1,3 @@
+interface WalletHistory {
+    payments: Payment[];
+}

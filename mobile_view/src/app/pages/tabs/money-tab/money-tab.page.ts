@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Keyboard} from '@ionic-native/keyboard/ngx';
+import {Keyboard} from '@ionic-native/keyboard';
 
 @Component({
     selector: 'money-tab',
@@ -7,15 +7,14 @@ import {Keyboard} from '@ionic-native/keyboard/ngx';
     styleUrls: ['money-tab.page.scss']
 })
 export class MoneyTabPage implements OnInit, OnDestroy {
-    public countToEndMonth: number;
-    public currencySymbol: string;
+    private isMoneyBackBtnShow: boolean = false;
+    private writeOffMoney: number;
 
     constructor(public keyboard: Keyboard) {
-        this.countToEndMonth = 12312;
-        this.currencySymbol = '&#8381;';
     }
 
     ngOnInit(): void {
+        this.keyboard.isVisible = true;
         this.keyboard.show();
     }
 

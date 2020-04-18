@@ -1,11 +1,22 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>
-      {{this.countToEndMonth}} {{this.currencySymbol}}
-    </ion-title>
   </ion-toolbar>
 </ion-header>
-
 <ion-content>
-
+  <ion-grid>
+    <ion-row>
+      <ion-col>Бюджет на 30дн</ion-col>
+      <ion-col text-end>15000р</ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>На сегодня</ion-col>
+      <ion-col text-end>500р</ion-col>
+    </ion-row>
+  </ion-grid>
+  <div class="write-off">
+    {{writeOffMoney}}
+  </div>
+  <div *ngIf="isMoneyBackBtnShow">
+    Вернуть {{writeOffMoney}}
+  </div>
 </ion-content>

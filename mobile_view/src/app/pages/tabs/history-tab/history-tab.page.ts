@@ -1,11 +1,11 @@
 import {Component} from '@angular/core';
 
 @Component({
-    selector: 'note-tab',
-    templateUrl: 'note-tab.page.html',
-    styleUrls: ['note-tab.page.scss']
+    selector: 'history-tab',
+    templateUrl: 'history-tab.page.html',
+    styleUrls: ['history-tab.page.scss']
 })
-export class NoteTabPage {
+export class HistoryTabPage {
     public countToEndMonth: number;
     public currencySymbol: string;
 
