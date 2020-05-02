@@ -1,4 +1,4 @@
-export function sideMenuConfig() {
+export function sideMenuConfig(): any[] {
     return [
         {
             title: 'Home',
