@@ -15,12 +15,12 @@ const routes: Routes = [
         loadChildren: () => import('./pages/my-goal/my-goal.module').then(m => m.MyGoalPageModule)
     },
     {
-        path: 'family-qr-code',
-        loadChildren: () => import('./pages/family-qr-code/family-qr-code.module').then(m => m.FamilyQrCodePageModule)
+        path: 'family',
+        loadChildren: () => import('./pages/family/family.module').then(m => m.FamilyModule)
     },
     {
-        path: 'language-and-currency',
-        loadChildren: () => import('./pages/language-and-currency/language-and-currency.module').then(m => m.LanguageAndCurrencyPageModule)
+        path: 'settings',
+        loadChildren: () => import('./pages/settings/settings.module').then(m => m.SettingsModule)
     }
 ];
 

@@ -1,19 +1,19 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 import {IonicModule} from '@ionic/angular';
+import {FamilyPage} from './family.page';
 
-import {LanguageAndCurrencyPage} from './language-and-currency.page';
 
-describe('LanguageAndCurrencyPage', () => {
-    let component: LanguageAndCurrencyPage;
-    let fixture: ComponentFixture<LanguageAndCurrencyPage>;
+describe('FamilyQrCodePage', () => {
+    let component: FamilyPage;
+    let fixture: ComponentFixture<FamilyPage>;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [LanguageAndCurrencyPage],
+            declarations: [FamilyPage],
             imports: [IonicModule.forRoot()]
         }).compileComponents();
 
-        fixture = TestBed.createComponent(LanguageAndCurrencyPage);
+        fixture = TestBed.createComponent(FamilyPage);
         component = fixture.componentInstance;
         fixture.detectChanges();
     }));

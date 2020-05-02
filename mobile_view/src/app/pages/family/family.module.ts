@@ -3,19 +3,18 @@ import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 
 import {IonicModule} from '@ionic/angular';
+import {FamilyRoutingModule} from './family-routing.module';
+import {FamilyPage} from './family.page';
 
-import {FamilyQrCodePageRoutingModule} from './family-qr-code-routing.module';
-
-import {FamilyQrCodePage} from './family-qr-code.page';
 
 @NgModule({
     imports: [
         CommonModule,
         FormsModule,
         IonicModule,
-        FamilyQrCodePageRoutingModule
+        FamilyRoutingModule
     ],
-    declarations: [FamilyQrCodePage]
+    declarations: [FamilyPage]
 })
-export class FamilyQrCodePageModule {
+export class FamilyModule {
 }
