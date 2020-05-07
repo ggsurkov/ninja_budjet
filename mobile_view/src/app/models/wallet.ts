@@ -1,6 +1,5 @@
 import {Guid} from 'guid-typescript';
 import {WalletConfig} from './wallet-config';
-import * as moment from 'moment';
 
 export interface Wallet {
     walletValue: number;
@@ -11,13 +10,13 @@ export interface Wallet {
 
 }
 
-export function createNewWallet(): Wallet {
+export function createNewWallet(name?: string): Wallet {
     return {
         walletValue: 0,
         walletRemainingDays: 0,
         walletHistory: null,
         walletConfig: {
-            name: 'New Wallet', plannedBudgetValue: 0, plannedBudgetExpireDay: moment().toDate()
+            name: name ? name : 'New Wallet', plannedBudgetValue: 0, plannedBudgetExpireDay: new Date()
         },
         guid: Guid.create().toString()
     };

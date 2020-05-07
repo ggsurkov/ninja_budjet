@@ -6,42 +6,32 @@
     <ion-title>
       Wallets
     </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="editWallet(mainWallet)">
+        <ion-icon color="primary" name="build"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <ion-list>
-    <ion-radio-group (ionChange)="chooseWallet($event)" [value]="wallets[0].guid">
+    <ion-radio-group #ionRadioGroup (ionChange)="chooseWallet($event.detail.value)" [value]="mainWallet.guid">
       <ion-list-header>
-        <ion-label>Wallets</ion-label>
+        <ion-label>Choose a Main Wallet</ion-label>
       </ion-list-header>
 
       <ion-item *ngFor="let wallet of wallets">
-        <ion-label>{{wallet.name}}</ion-label>
+        <ion-label>{{wallet.walletConfig.name}}</ion-label>
         <ion-radio [value]="wallet.guid" slot="start"></ion-radio>
       </ion-item>
 
     </ion-radio-group>
   </ion-list>
 
-  <ion-list>
-    <ion-list-header>
-      <ion-label>Config</ion-label>
-    </ion-list-header>
-
-    <ion-item *ngFor="let walletParam of this.defaultWalletConfigKeys">
-      <ion-label>{{walletParam.label}}</ion-label>
-      <ion-input [(ngModel)]="mainWallet[walletParam.paramName]" [placeholder]="walletParam.value"></ion-input>
-    </ion-item>
-  </ion-list>
-
-  <ion-footer class="ion-no-border">
-    <ion-toolbar>
-      <ion-buttons>
-        <ion-button (click)="saveWallet(mainWallet)">Save</ion-button>
-        <ion-button (click)="createWallet()">New</ion-button>
-      </ion-buttons>
-    </ion-toolbar>
-  </ion-footer>
-
 </ion-content>
+<ion-fab horizontal="end" slot="fixed" vertical="bottom">
+  <ion-fab-button (click)="createWallet()">
+    <ion-icon name="add"></ion-icon>
+  </ion-fab-button>
+</ion-fab>

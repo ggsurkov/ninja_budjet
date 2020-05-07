@@ -4,13 +4,14 @@ import {Wallet} from '../../../models/wallet';
 import {getDefaultWalletConfigKeys, WalletConfigKeyI} from '../../../config/default-wallet-config';
 
 @Component({
-    selector: 'app-create-wallet-modal',
-    templateUrl: './create-wallet-modal.page.html',
-    styleUrls: ['./create-wallet-modal.page.scss'],
+    selector: 'app-wallet-modal',
+    templateUrl: './wallet-modal.page.html',
+    styleUrls: ['./wallet-modal.page.scss'],
 })
 
-export class CreateWalletModalPage implements OnInit {
+export class WalletModalPage implements OnInit {
     @Input() public wallet: Wallet;
+    @Input() public modalTitle: string;
     public defaultWalletConfigKeys: WalletConfigKeyI[];
 
     constructor(private modalCtrl: ModalController) {
@@ -30,7 +31,7 @@ export class CreateWalletModalPage implements OnInit {
     toCreate(wallet: Wallet): any {
         this.modalCtrl.dismiss({
             walletCreated: true,
-            wallet: wallet
+            wallet
         });
     }
 }

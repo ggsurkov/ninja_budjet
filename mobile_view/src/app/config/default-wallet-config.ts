@@ -1,23 +1,29 @@
 import {createNewWalletConfig} from '../models/wallet-config';
-import * as moment from 'moment';
 
-enum walletConfigParamLabelEnum {
-    plannedBudgetValue = 'Planned budget',
-    plannedBudgetExpireDay = 'Planned expire date',
-    name = 'Wallet name'
+const WalletConfigParamLabelMap = {
+    plannedBudgetValue: 'Planned budget',
+    plannedBudgetExpireDay: 'Planned expire date',
+    name: 'Wallet name'
+};
+
+export enum WalletConfigParamEnum {
+    plannedBudgetValue = 'plannedBudgetValue',
+    plannedBudgetExpireDay = 'plannedBudgetExpireDay',
+    name = 'name'
 }
 
 function walletConfigParamValue(key: string): any {
     let value: any;
+    Object.getOwnPropertyNames(WalletConfigParamLabelMap);
     switch (key) {
-        case walletConfigParamLabelEnum.name:
-            value = 'Wallet Name';
+        case WalletConfigParamEnum.name:
+            value = 'New Wallet';
             break;
-        case walletConfigParamLabelEnum.plannedBudgetValue:
+        case WalletConfigParamEnum.plannedBudgetValue:
             value = 0;
             break;
-        case walletConfigParamLabelEnum.plannedBudgetExpireDay:
-            value = moment().toDate();
+        case WalletConfigParamEnum.plannedBudgetExpireDay:
+            value = new Date();
             break;
         default:
             value = null;
@@ -36,7 +42,13 @@ export function getDefaultWalletConfigKeys(): WalletConfigKeyI[] {
     const newWalletConfig = createNewWalletConfig();
     const walletConfigKeys: WalletConfigKeyI[] = [];
     for (const key of Object.keys(newWalletConfig)) {
-        walletConfigKeys.push({label: walletConfigParamLabelEnum[key], paramName: key, value: walletConfigParamValue(key)});
+        walletConfigKeys.push(
+            {
+                label: WalletConfigParamLabelMap[key],
+                paramName: key,
+                value: walletConfigParamValue(key),
+            }
+        );
     }
     return walletConfigKeys;
 }

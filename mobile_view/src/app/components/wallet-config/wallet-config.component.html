@@ -1,0 +1,24 @@
+<ion-list>
+  <ion-list-header>
+    <ion-label>Config</ion-label>
+  </ion-list-header>
+
+  <ion-item *ngFor="let walletParam of this.defaultWalletConfigKeys">
+    <ion-label>{{walletParam.label}}</ion-label>
+    <ion-input
+        *ngIf="walletParam.paramName === walletConfigParamEnum.name"
+        [(ngModel)]="wallet.walletConfig[walletParam.paramName]"
+        [placeholder]="walletParam.value"
+        type="text">
+    </ion-input>
+    <ion-input
+        *ngIf="walletParam.paramName === walletConfigParamEnum.plannedBudgetValue"
+        [(ngModel)]="wallet.walletConfig[walletParam.paramName]"
+        [placeholder]="walletParam.value"
+        type="number">
+    </ion-input>
+    <ion-datetime *ngIf="walletParam.paramName === walletConfigParamEnum.plannedBudgetExpireDay"
+                  [placeholder]="walletParam.value" [value]="today">
+    </ion-datetime>
+  </ion-item>
+</ion-list>
