@@ -3,20 +3,20 @@ import {createNewWalletConfig} from '../models/wallet-config';
 const WalletConfigParamLabelMap = {
     plannedBudgetValue: 'Planned budget',
     plannedBudgetExpireDay: 'Planned expire date',
-    name: 'Wallet name'
+    title: 'Wallet title'
 };
 
 export enum WalletConfigParamEnum {
     plannedBudgetValue = 'plannedBudgetValue',
     plannedBudgetExpireDay = 'plannedBudgetExpireDay',
-    name = 'name'
+    title = 'title'
 }
 
 function walletConfigParamValue(key: string): any {
     let value: any;
     Object.getOwnPropertyNames(WalletConfigParamLabelMap);
     switch (key) {
-        case WalletConfigParamEnum.name:
+        case WalletConfigParamEnum.title:
             value = 'New Wallet';
             break;
         case WalletConfigParamEnum.plannedBudgetValue:

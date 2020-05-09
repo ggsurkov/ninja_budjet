@@ -11,27 +11,30 @@ import {getDefaultWalletConfigKeys, WalletConfigKeyI} from '../../../config/defa
 
 export class WalletModalPage implements OnInit {
     @Input() public wallet: Wallet;
-    @Input() public modalTitle: string;
     public defaultWalletConfigKeys: WalletConfigKeyI[];
+    public modalTitle: string;
+    public today: string;
 
     constructor(private modalCtrl: ModalController) {
     }
 
-    ngOnInit() {
+    ngOnInit(): void {
+        this.today = new Date().toLocaleDateString();
+        this.modalTitle = this.wallet.walletConfig.title;
         this.defaultWalletConfigKeys = getDefaultWalletConfigKeys();
     }
 
-    dismissModal(): any {
+    dismissModal(): void {
         this.modalCtrl.dismiss({
-            walletCreated: false,
+            walletChanged: false,
             wallet: this.wallet
         });
     }
 
-    toCreate(wallet: Wallet): any {
+    toCreate(): void {
         this.modalCtrl.dismiss({
-            walletCreated: true,
-            wallet
+            walletChanged: true,
+            wallet: this.wallet
         });
     }
 }

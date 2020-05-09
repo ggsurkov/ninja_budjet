@@ -7,17 +7,16 @@ export interface Wallet {
     walletHistory: WalletHistory;
     walletConfig: WalletConfig;
     guid: string;
-
 }
 
-export function createNewWallet(name?: string): Wallet {
+export function createNewWallet(title?: string): Wallet {
     return {
         walletValue: 0,
         walletRemainingDays: 0,
         walletHistory: null,
         walletConfig: {
-            name: name ? name : 'New Wallet', plannedBudgetValue: 0, plannedBudgetExpireDay: new Date()
+            title: title ? title : 'New Wallet', plannedBudgetValue: 0, plannedBudgetExpireDay: new Date()
         },
-        guid: Guid.create().toString()
+        guid: Guid.create().toString(),
     };
 }
