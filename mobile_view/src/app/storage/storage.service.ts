@@ -3,7 +3,6 @@ import {createNewWallet, Wallet} from '../models/wallet';
 import {createNewUser} from '../models/user';
 import {Storage} from '@ionic/storage';
 import {replaceInArrayByParam} from '../utils/replace-in-array.util';
-import {ToastController} from '@ionic/angular';
 import {Payment} from '../models/payment';
 
 @Injectable({
@@ -11,7 +10,7 @@ import {Payment} from '../models/payment';
 })
 export class StorageService {
 
-    constructor(private storage: Storage, private toastController: ToastController) {
+    constructor(private storage: Storage) {
     }
 
     public async set(key: string, value: any): Promise<any> {

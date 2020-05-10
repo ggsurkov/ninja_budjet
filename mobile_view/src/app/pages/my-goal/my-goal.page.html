@@ -10,5 +10,44 @@
 </ion-header>
 
 <ion-content>
+  <ion-item *ngIf="goal; else goalTutorial">
+    <ion-thumbnail slot="start">
+      <img src="../../../assets/images/goal-star.svg">
+    </ion-thumbnail>
+    <ion-label>
+      <h3>{{goal?.name}}</h3>
+      <p *ngIf="goal?.info">{{goal.info}}</p>
+    </ion-label>
+  </ion-item>
+  <ion-list *ngIf="goal">
+    <ion-list-header>
+      <ion-label>{{goal.currentValue === goal.wonValue ? 'Completed!' : 'Progress: '}} {{goal.currentValue + ' / ' + goal.wonValue}}</ion-label>
+    </ion-list-header>
+    <ion-progress-bar [value]="goalProgress"></ion-progress-bar>
+  </ion-list>
+  <ng-template #goalTutorial>
+    <ion-item>
+      <ion-label>
+        <h3>What is goal?</h3>
+        <p>You can save money more fun!</p>
+        <p>Goal can help you track how many money you save in each period from all wallets</p>
+        <p>And saved count you can reach to favorite thing: vacation, presents and etc</p>
+        <p>Just add value how many you want to save money and try improve your economy each period</p>
+        <p>Good luck!</p>
+      </ion-label>
+    </ion-item>
+  </ng-template>
 
 </ion-content>
+
+<ion-fab *ngIf="!goal" horizontal="end" slot="fixed" vertical="bottom">
+  <ion-fab-button (click)="createNewGoal()">
+    <ion-icon name="add"></ion-icon>
+  </ion-fab-button>
+</ion-fab>
+
+<ion-fab *ngIf="goal" horizontal="end" slot="fixed" vertical="bottom">
+  <ion-fab-button (click)="editGoal(goal)">
+    <ion-icon name="build"></ion-icon>
+  </ion-fab-button>
+</ion-fab>

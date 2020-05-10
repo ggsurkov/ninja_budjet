@@ -7,6 +7,7 @@ import {IonicModule} from '@ionic/angular';
 import {MyGoalPageRoutingModule} from './my-goal-routing.module';
 
 import {MyGoalPage} from './my-goal.page';
+import {GoalModalPage} from './goal-modal/goal-modal.page';
 
 @NgModule({
     imports: [
@@ -15,7 +16,8 @@ import {MyGoalPage} from './my-goal.page';
         IonicModule,
         MyGoalPageRoutingModule
     ],
-    declarations: [MyGoalPage]
+    entryComponents: [GoalModalPage],
+    declarations: [MyGoalPage, GoalModalPage]
 })
 export class MyGoalPageModule {
 }

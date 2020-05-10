@@ -1,0 +1,43 @@
+<ion-header translucent>
+  <ion-toolbar>
+    <ion-title>Edit {{modalTitle}}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismissModal()">Close</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+  <ion-item>
+    <ion-label>Name</ion-label>
+    <ion-input
+        [(ngModel)]="goal.name"
+        [placeholder]="'Vacation'"
+        type="text">
+    </ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label>Value</ion-label>
+    <ion-input
+        [(ngModel)]="goal.wonValue"
+        [placeholder]="'For example: 3000$'"
+        type="number">
+    </ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label>Description</ion-label>
+    <ion-textarea
+        [(ngModel)]="goal.info"
+        [placeholder]="'Example: Surfing in Portugal!'"
+        type="text">
+    </ion-textarea>
+  </ion-item>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-buttons class="ion-justify-content-around">
+      <ion-button (click)="toCreate()">Save</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>

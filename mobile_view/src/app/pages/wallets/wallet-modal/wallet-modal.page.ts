@@ -20,7 +20,7 @@ export class WalletModalPage {
         this.modalTitle = this.wallet.config.title;
     }
 
-    dismissModal(): void {
+    private dismissModal(): void {
         this.modalCtrl.dismiss({
             walletChanged: false,
             wallet: this.wallet
