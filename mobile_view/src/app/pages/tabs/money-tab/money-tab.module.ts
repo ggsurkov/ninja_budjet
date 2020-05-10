@@ -12,6 +12,9 @@ import {MoneyTabPage} from './money-tab.page';
         FormsModule,
         RouterModule.forChild([{path: '', component: MoneyTabPage}])
     ],
+    exports: [
+        MoneyTabPage
+    ],
     declarations: [MoneyTabPage]
 })
 export class Tab1PageModule {

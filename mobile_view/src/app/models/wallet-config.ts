@@ -1,9 +1,9 @@
 export interface WalletConfig {
     title: string;
     plannedBudgetValue: number;
-    plannedBudgetExpireDay: Date;
+    plannedBudgetExpireDay: string;
 }
 
 export function createNewWalletConfig(): any {
-    return {title: 'New Wallet', plannedBudgetValue: 0, plannedBudgetExpireDay: new Date()};
+    return {title: 'New Wallet', plannedBudgetValue: null, plannedBudgetExpireDay: null};
 }

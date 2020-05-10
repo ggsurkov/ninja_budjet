@@ -6,13 +6,19 @@ import {FormsModule} from '@angular/forms';
 import {TabsPageRoutingModule} from './tabs-routing.module';
 
 import {TabsPage} from './tabs.page';
+import {Tab1PageModule} from './money-tab/money-tab.module';
+import {Tab2PageModule} from './history-tab/history-tab.module';
+
+export const SHARED_DATA = {data: 'sharedData'};
 
 @NgModule({
     imports: [
         IonicModule,
         CommonModule,
         FormsModule,
-        TabsPageRoutingModule
+        TabsPageRoutingModule,
+        Tab1PageModule,
+        Tab2PageModule
     ],
     declarations: [TabsPage]
 })

@@ -12,6 +12,9 @@ import {HistoryTabPage} from './history-tab.page';
         FormsModule,
         RouterModule.forChild([{path: '', component: HistoryTabPage}])
     ],
+    exports: [
+        HistoryTabPage
+    ],
     declarations: [HistoryTabPage]
 })
 export class Tab2PageModule {

@@ -1,21 +1,22 @@
 import {Guid} from 'guid-typescript';
 import {WalletConfig} from './wallet-config';
+import {WalletHistory} from './wallet-history';
 
 export interface Wallet {
-    walletValue: number;
-    walletRemainingDays: number;
-    walletHistory: WalletHistory;
-    walletConfig: WalletConfig;
+    value: number;
+    remainingDays: number;
+    history: WalletHistory;
+    config: WalletConfig;
     guid: string;
 }
 
 export function createNewWallet(title?: string): Wallet {
     return {
-        walletValue: 0,
-        walletRemainingDays: 0,
-        walletHistory: null,
-        walletConfig: {
-            title: title ? title : 'New Wallet', plannedBudgetValue: 0, plannedBudgetExpireDay: new Date()
+        value: 0,
+        remainingDays: 0,
+        history: {payments: []},
+        config: {
+            title: title ? title : 'New Wallet', plannedBudgetValue: null, plannedBudgetExpireDay: null
         },
         guid: Guid.create().toString(),
     };

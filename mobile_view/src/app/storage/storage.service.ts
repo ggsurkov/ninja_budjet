@@ -1,14 +1,17 @@
 import {Injectable} from '@angular/core';
-import {createNewWallet} from '../models/wallet';
+import {createNewWallet, Wallet} from '../models/wallet';
 import {createNewUser} from '../models/user';
 import {Storage} from '@ionic/storage';
+import {replaceInArrayByParam} from '../utils/replace-in-array.util';
+import {ToastController} from '@ionic/angular';
+import {Payment} from '../models/payment';
 
 @Injectable({
     providedIn: 'root'
 })
 export class StorageService {
 
-    constructor(private storage: Storage) {
+    constructor(private storage: Storage, private toastController: ToastController) {
     }
 
     public async set(key: string, value: any): Promise<any> {
@@ -68,13 +71,49 @@ export class StorageService {
         this.storage.clear();
     }
 
+    public async saveMainWallet(wallet: Wallet): Promise<any> {
+        try {
+            this.setObject('mainWallet', wallet).then(() => {
+                this.getObject('wallets').then((walletsFromStorage) => {
+                    const updatedWallets = replaceInArrayByParam(walletsFromStorage, wallet, 'guid');
+                    this.setObject('wallets', updatedWallets).then(() => {
+                        console.log('saveMainWallet successfully!', wallet);
+                        return null;
+                    });
+                });
+            });
+        } catch (reason) {
+            console.log(reason);
+            return null;
+        }
+    }
+
+    public async deletePaymentByGuid(paymentGuid: string): Promise<any> {
+        try {
+            this.getObject('mainWallet').then((mainWalletFromStorage) => {
+                const deletedPayment: Payment = mainWalletFromStorage.history.payments
+                    .find((payment: Payment) => payment.guid === paymentGuid);
+                mainWalletFromStorage.history.payments.splice(mainWalletFromStorage.history.payments.indexOf(deletedPayment), 1);
+                this.saveMainWallet(mainWalletFromStorage).then(() => {
+                    console.log('deletePaymentByGuid successfully!', mainWalletFromStorage.history.payments);
+                    return null;
+                });
+            });
+        } catch (reason) {
+            console.log(reason);
+            return null;
+        }
+    }
+
     public initDataApp(mode: { defaultMode: boolean }) {
         if (mode.defaultMode) {
             // this.setObject('globalStorage', initGlobalStorage());
+            const firstWallet: Wallet = createNewWallet('First Wallet');
             this.setObject('user', createNewUser());
-            this.setObject('wallets', [createNewWallet('First Wallet')]);
+            this.setObject('wallets', [firstWallet]);
             this.setObject('goal', null);
-            this.setObject('mainWallet', null);
+            this.setObject('mainWallet', firstWallet);
         }
     }
+
 }

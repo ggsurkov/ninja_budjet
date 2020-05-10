@@ -1,4 +1,6 @@
 import {Component} from '@angular/core';
+import {Wallet} from '../../../models/wallet';
+import {StorageService} from '../../../storage/storage.service';
 
 @Component({
     selector: 'history-tab',
@@ -6,11 +8,16 @@ import {Component} from '@angular/core';
     styleUrls: ['history-tab.page.scss']
 })
 export class HistoryTabPage {
-    public countToEndMonth: number;
-    public currencySymbol: string;
+    public currencySymbol: string = '&#8381;';
+    public mainWallet: Wallet;
 
-    constructor() {
-        this.countToEndMonth = 12312;
-        this.currencySymbol = '&#8381;';
+    constructor(private storageService: StorageService) {
     }
+
+    ionViewDidEnter() {
+        this.storageService.getObject('mainWallet').then((data: Wallet) => {
+            this.mainWallet = data;
+        });
+    }
+
 }

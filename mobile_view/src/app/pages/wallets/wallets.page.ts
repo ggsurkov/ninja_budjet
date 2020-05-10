@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 import {createNewWallet, Wallet} from '../../models/wallet';
 import {getDefaultWalletConfigKeys, WalletConfigKeyI} from '../../config/default-wallet-config';
 import {ModalController, ToastController} from '@ionic/angular';
@@ -14,7 +14,7 @@ import {StorageService} from '../../storage/storage.service';
     templateUrl: './wallets.page.html',
     styleUrls: ['./wallets.page.scss'],
 })
-export class WalletsPage implements OnInit {
+export class WalletsPage {
 
     public wallets: Wallet[] = [];
     public mainWallet: Wallet = null;
@@ -27,8 +27,10 @@ export class WalletsPage implements OnInit {
                 private storageService: StorageService) {
     }
 
-    ngOnInit() {
-        this.defaultWalletConfigKeys = getDefaultWalletConfigKeys();
+    ionViewDidEnter(): void {
+        if (!this.defaultWalletConfigKeys) {
+            this.defaultWalletConfigKeys = getDefaultWalletConfigKeys();
+        }
         this.storageService.getObject('wallets').then((wallets: Wallet[]) => {
             this.wallets = wallets;
         });
@@ -51,7 +53,7 @@ export class WalletsPage implements OnInit {
                 if (modalOutput.data.walletChanged) {
                     this.wallets.push(modalOutput.data.wallet);
                     this.storageService.setObject('wallets', this.wallets).then(() => {
-                        this.presentToast(modalOutput.data.wallet.walletConfig.title + ' created successfully!');
+                        this.presentToast(modalOutput.data.wallet.config.title + ' created successfully!');
                     });
                 }
             });
@@ -63,8 +65,12 @@ export class WalletsPage implements OnInit {
             this.walletModal.onDidDismiss().then((modalOutput: OverlayEventDetail) => {
                 if (modalOutput.data.walletChanged) {
                     const updatedWallets: Wallet[] = replaceInArrayByParam(this.wallets, modalOutput.data.wallet, 'guid');
+                    this.storageService.setObject('mainWallet', modalOutput.data.wallet).then(() => {
+                        this.mainWallet = modalOutput.data.wallet;
+                    });
                     this.storageService.setObject('wallets', updatedWallets).then(() => {
-                        this.presentToast(modalOutput.data.wallet.walletConfig.title + ' edited successfully!');
+                        Object.assign(this.wallets, updatedWallets);
+                        this.presentToast(modalOutput.data.wallet.config.title + ' edited successfully!');
                     });
                 }
             });

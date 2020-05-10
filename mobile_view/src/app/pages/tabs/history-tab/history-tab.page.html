@@ -1,4 +1,20 @@
 <ion-content>
-
-
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title>
+        {{mainWallet?.config?.title}}
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-list>
+    <ion-list-header>Payments History</ion-list-header>
+    <ion-item *ngFor="let payment of this.mainWallet?.history?.payments">
+      <ion-label>{{payment.value}}</ion-label>
+      <ion-note slot="end">{{payment.payTime}}</ion-note>
+      <ion-note slot="end">{{payment.payDate}}</ion-note>
+    </ion-item>
+  </ion-list>
 </ion-content>

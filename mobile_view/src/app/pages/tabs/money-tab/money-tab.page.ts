@@ -1,5 +1,9 @@
 import {Component} from '@angular/core';
-import {Keyboard} from '@ionic-native/keyboard';
+import {Router} from '@angular/router';
+import {Wallet} from '../../../models/wallet';
+import {Events} from '@ionic/angular';
+import {StorageService} from '../../../storage/storage.service';
+import {createNewPayment, Payment} from '../../../models/payment';
 
 @Component({
     selector: 'money-tab',
@@ -9,19 +13,26 @@ import {Keyboard} from '@ionic-native/keyboard';
 export class MoneyTabPage {
     private writeOffMoneyCount: number;
     private writeOffMoneyString: string = '0';
-    private returnPaymentValue: string = '';
     private plannedBudget: number = 15000;
     private plannedBudgetDay: number = 500;
+    public mainWallet: Wallet;
+    public currentPayment: Payment = null;
 
-    constructor(public keyboard: Keyboard) {
+    constructor(public router: Router, public events: Events, private storageService: StorageService) {
     }
 
-    public calculate(keyNumber: string): void {
+    ionViewDidEnter(): void {
+        this.storageService.getObject('mainWallet').then((data: Wallet) => {
+            this.mainWallet = data;
+        });
+    }
+
+    public calculateNumber(keyNumber: string): void {
         if (this.writeOffMoneyString === '0') {
             this.writeOffMoneyString = '';
         }
-        if (this.returnPaymentValue !== '') {
-            this.returnPaymentValue = '';
+        if (this.currentPayment) {
+            this.currentPayment = null;
         }
         this.writeOffMoneyString += keyNumber;
     }
@@ -37,11 +48,10 @@ export class MoneyTabPage {
         if (this.writeOffMoneyString === '0') {
             return;
         }
-        this.writeOffMoneyCount = parseFloat(this.writeOffMoneyString);
-        this.plannedBudget -= this.writeOffMoneyCount;
-        this.plannedBudgetDay -= this.writeOffMoneyCount;
-        this.returnPaymentValue = this.writeOffMoneyString;
-        this.writeOffMoneyString = '0';
+        const writeOffMoneyCount = parseFloat(this.writeOffMoneyString);
+        this.plannedBudget -= writeOffMoneyCount;
+        this.plannedBudgetDay -= writeOffMoneyCount;
+        this.createPayment(writeOffMoneyCount);
     }
 
     public calculateSeparator(): void {
@@ -52,13 +62,26 @@ export class MoneyTabPage {
     }
 
     public returnPayment(): void {
-        this.writeOffMoneyCount = parseFloat(this.returnPaymentValue);
-        this.plannedBudget += this.writeOffMoneyCount;
-        this.plannedBudgetDay += this.writeOffMoneyCount;
-        this.returnPaymentValue = '';
+        this.plannedBudget += this.currentPayment.value;
+        this.plannedBudgetDay += this.currentPayment.value;
+        this.deletePayment(this.currentPayment);
     }
 
     public cleanAll() {
         this.writeOffMoneyString = '0';
+    }
+
+    private createPayment(paymentValue: number): void {
+        this.currentPayment = createNewPayment(paymentValue);
+        this.mainWallet.history.payments.push(this.currentPayment);
+        this.storageService.saveMainWallet(this.mainWallet).then(() => {
+            this.cleanAll();
+        });
+    }
+
+    private deletePayment(payment: Payment): void {
+        this.storageService.deletePaymentByGuid(payment.guid).then(() => {
+            this.currentPayment = null;
+        });
     }
 }

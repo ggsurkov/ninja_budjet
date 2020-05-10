@@ -1,7 +1,6 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {ModalController} from '@ionic/angular';
 import {Wallet} from '../../../models/wallet';
-import {getDefaultWalletConfigKeys, WalletConfigKeyI} from '../../../config/default-wallet-config';
 
 @Component({
     selector: 'app-wallet-modal',
@@ -9,19 +8,16 @@ import {getDefaultWalletConfigKeys, WalletConfigKeyI} from '../../../config/defa
     styleUrls: ['./wallet-modal.page.scss'],
 })
 
-export class WalletModalPage implements OnInit {
+export class WalletModalPage {
     @Input() public wallet: Wallet;
-    public defaultWalletConfigKeys: WalletConfigKeyI[];
     public modalTitle: string;
     public today: string;
 
     constructor(private modalCtrl: ModalController) {
     }
 
-    ngOnInit(): void {
-        this.today = new Date().toLocaleDateString();
-        this.modalTitle = this.wallet.walletConfig.title;
-        this.defaultWalletConfigKeys = getDefaultWalletConfigKeys();
+    ionViewDidEnter(): void {
+        this.modalTitle = this.wallet.config.title;
     }
 
     dismissModal(): void {

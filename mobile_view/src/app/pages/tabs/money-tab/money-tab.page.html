@@ -1,5 +1,11 @@
 <ion-header>
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      {{mainWallet?.config?.title}}
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 <ion-content>
@@ -16,8 +22,8 @@
   <div class="money-tab_write-off">
     {{writeOffMoneyString}}
   </div>
-  <div (click)="returnPayment()" *ngIf="returnPaymentValue !== ''">
-    Вернуть {{returnPaymentValue}}
+  <div (click)="returnPayment()" *ngIf="currentPayment">
+    Вернуть {{currentPayment?.value}}
   </div>
 </ion-content>
 <ion-footer no-shadow>
@@ -26,19 +32,19 @@
       <ion-col size="10">
         <ion-row>
           <ion-col size="4">
-            <ion-row (click)="calculate('7')" class="money-tab_number-button--size">7</ion-row>
-            <ion-row (click)="calculate('4')" class="money-tab_number-button--size">4</ion-row>
-            <ion-row (click)="calculate('1')" class="money-tab_number-button--size">1</ion-row>
+            <ion-row (click)="calculateNumber('7')" class="money-tab_number-button--size">7</ion-row>
+            <ion-row (click)="calculateNumber('4')" class="money-tab_number-button--size">4</ion-row>
+            <ion-row (click)="calculateNumber('1')" class="money-tab_number-button--size">1</ion-row>
           </ion-col>
           <ion-col size="4">
-            <ion-row (click)="calculate('8')" class="money-tab_number-button--size">8</ion-row>
-            <ion-row (click)="calculate('5')" class="money-tab_number-button--size">5</ion-row>
-            <ion-row (click)="calculate('2')" class="money-tab_number-button--size">2</ion-row>
+            <ion-row (click)="calculateNumber('8')" class="money-tab_number-button--size">8</ion-row>
+            <ion-row (click)="calculateNumber('5')" class="money-tab_number-button--size">5</ion-row>
+            <ion-row (click)="calculateNumber('2')" class="money-tab_number-button--size">2</ion-row>
           </ion-col>
           <ion-col size="4">
-            <ion-row (click)="calculate('9')" class="money-tab_number-button--size">9</ion-row>
-            <ion-row (click)="calculate('6')" class="money-tab_number-button--size">6</ion-row>
-            <ion-row (click)="calculate('3')" class="money-tab_number-button--size">3</ion-row>
+            <ion-row (click)="calculateNumber('9')" class="money-tab_number-button--size">9</ion-row>
+            <ion-row (click)="calculateNumber('6')" class="money-tab_number-button--size">6</ion-row>
+            <ion-row (click)="calculateNumber('3')" class="money-tab_number-button--size">3</ion-row>
           </ion-col>
         </ion-row>
         <ion-row>
@@ -46,7 +52,7 @@
             <ion-row (click)="cleanAll()" class="money-tab_number-button--size">C</ion-row>
           </ion-col>
           <ion-col size="4">
-            <ion-row (click)="calculate('0')" class="money-tab_number-button--size">0</ion-row>
+            <ion-row (click)="calculateNumber('0')" class="money-tab_number-button--size">0</ion-row>
           </ion-col>
           <ion-col size="4">
             <ion-row (click)="calculateSeparator()" class="money-tab_number-button--size">.,</ion-row>

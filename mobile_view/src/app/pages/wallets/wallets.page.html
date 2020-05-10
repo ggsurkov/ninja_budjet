@@ -22,7 +22,7 @@
       </ion-list-header>
 
       <ion-item *ngFor="let wallet of wallets">
-        <ion-label>{{wallet.walletConfig.title}}</ion-label>
+        <ion-label>{{wallet.config.title}}</ion-label>
         <ion-radio [value]="wallet.guid" slot="start"></ion-radio>
       </ion-item>
 

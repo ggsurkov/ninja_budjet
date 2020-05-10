@@ -8,20 +8,20 @@
     <ion-input
         (ngModelChange)="handleChange($event, walletParam.paramName)"
         *ngIf="walletParam.paramName === walletConfigParamEnum.title"
-        [(ngModel)]="wallet.walletConfig[walletParam.paramName]"
+        [(ngModel)]="wallet.config[walletParam.paramName]"
         [placeholder]="walletParam.value"
         type="text">
     </ion-input>
     <ion-input
         *ngIf="walletParam.paramName === walletConfigParamEnum.plannedBudgetValue"
         (ngModelChange)="handleChange($event, walletParam.paramName)"
-        [(ngModel)]="wallet.walletConfig[walletParam.paramName]"
+        [(ngModel)]="wallet.config[walletParam.paramName]"
         [placeholder]="walletParam.value"
         type="number">
     </ion-input>
     <ion-datetime *ngIf="walletParam.paramName === walletConfigParamEnum.plannedBudgetExpireDay"
-                  (ionChange)="handleChange($event, walletParam.paramName)"
-                  [placeholder]="walletParam.value" [value]="today">
+                  (ionChange)="handleDateChange($event, walletParam.paramName)"
+                  [placeholder]="walletParam.value" [value]="wallet.config[walletParam.paramName]">
     </ion-datetime>
   </ion-item>
 </ion-list>
