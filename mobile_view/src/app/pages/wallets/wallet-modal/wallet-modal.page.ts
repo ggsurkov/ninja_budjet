@@ -10,6 +10,7 @@ import {Wallet} from '../../../models/wallet';
 
 export class WalletModalPage {
     @Input() public wallet: Wallet;
+    @Input() public isNewWallet: boolean;
     public modalTitle: string;
     public today: string;
 

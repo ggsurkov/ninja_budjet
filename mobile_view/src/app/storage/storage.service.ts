@@ -4,6 +4,7 @@ import {createNewUser} from '../models/user';
 import {Storage} from '@ionic/storage';
 import {replaceInArrayByParam} from '../utils/replace-in-array.util';
 import {Payment} from '../models/payment';
+import {initDefaultAppSettings} from '../models/app-settings';
 
 @Injectable({
     providedIn: 'root'
@@ -112,6 +113,7 @@ export class StorageService {
             this.setObject('wallets', [firstWallet]);
             this.setObject('goal', null);
             this.setObject('mainWallet', firstWallet);
+            this.setObject('appSettings', initDefaultAppSettings());
         }
     }
 

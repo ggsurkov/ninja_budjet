@@ -48,7 +48,7 @@ export class WalletsPage {
     }
 
     public createWallet(): void {
-        this.presentModal(createNewWallet()).then(() => {
+        this.presentModal(createNewWallet(), true).then(() => {
             this.walletModal.onDidDismiss().then((modalOutput: OverlayEventDetail) => {
                 if (modalOutput.data.walletChanged) {
                     this.wallets.push(modalOutput.data.wallet);
@@ -61,7 +61,7 @@ export class WalletsPage {
     }
 
     public editWallet(editedWallet: Wallet): void {
-        this.presentModal(toCopy(editedWallet)).then(() => {
+        this.presentModal(toCopy(editedWallet), false).then(() => {
             this.walletModal.onDidDismiss().then((modalOutput: OverlayEventDetail) => {
                 if (modalOutput.data.walletChanged) {
                     const updatedWallets: Wallet[] = replaceInArrayByParam(this.wallets, modalOutput.data.wallet, 'guid');
@@ -77,11 +77,12 @@ export class WalletsPage {
         });
     }
 
-    public async presentModal(wallet: Wallet) {
+    public async presentModal(wallet: Wallet, isNewWallet: boolean) {
         const modal: HTMLIonModalElement = await this.modalController.create({
             component: WalletModalPage,
             componentProps: {
                 wallet,
+                isNewWallet
             }
         });
         await modal.present();

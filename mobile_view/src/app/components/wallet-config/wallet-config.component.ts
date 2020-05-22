@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {getDefaultWalletConfigKeys, WalletConfigKeyI, WalletConfigParamEnum} from '../../config/default-wallet-config';
 import {Wallet} from '../../models/wallet';
+import {CURRENCY_TITLES} from '../../dictionary/currency-type';
 
 @Component({
     selector: 'app-wallet-config',
@@ -11,7 +12,9 @@ export class WalletConfigComponent implements OnInit {
     public defaultWalletConfigKeys: WalletConfigKeyI[];
     public walletConfigParamEnum: typeof WalletConfigParamEnum = WalletConfigParamEnum;
     public today: string;
+    public currency: string[] = CURRENCY_TITLES;
     @Input() public wallet: Wallet;
+    @Input() public isNewWallet: boolean;
     @Output() public walletChange: EventEmitter<Wallet> = new EventEmitter<Wallet>();
 
     constructor() {

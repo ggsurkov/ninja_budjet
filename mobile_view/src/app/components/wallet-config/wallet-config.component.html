@@ -12,6 +12,14 @@
         [placeholder]="walletParam.value"
         type="text">
     </ion-input>
+    <ion-select
+        (ngModelChange)="handleChange($event, walletParam.paramName)"
+        *ngIf="walletParam.paramName === walletConfigParamEnum.currency"
+        [(ngModel)]="wallet.config[walletParam.paramName]"
+        [disabled]="!isNewWallet"
+        [placeholder]="walletParam.value">
+      <ion-select-option *ngFor="let curr of currency" [value]="curr">{{curr}}</ion-select-option>
+    </ion-select>
     <ion-input
         *ngIf="walletParam.paramName === walletConfigParamEnum.plannedBudgetValue"
         (ngModelChange)="handleChange($event, walletParam.paramName)"

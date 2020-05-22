@@ -12,6 +12,10 @@ import {AppComponent} from './app.component';
 import {Keyboard} from '@ionic-native/keyboard';
 import {IonicStorageModule} from '@ionic/storage';
 import {StorageService} from './storage/storage.service';
+import {HttpClient, HttpClientModule} from '@angular/common/http';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
+
 
 @NgModule({
     declarations: [AppComponent],
@@ -20,7 +24,15 @@ import {StorageService} from './storage/storage.service';
         BrowserModule,
         IonicModule.forRoot(),
         AppRoutingModule,
-        IonicStorageModule.forRoot()
+        HttpClientModule,
+        IonicStorageModule.forRoot(),
+        TranslateModule.forRoot({
+            loader: {
+                provide: TranslateLoader,
+                useFactory: (translateLoaderFactory),
+                deps: [HttpClient]
+            }
+        }),
     ],
     providers: [
         StatusBar,
@@ -32,4 +44,8 @@ import {StorageService} from './storage/storage.service';
     bootstrap: [AppComponent]
 })
 export class AppModule {
+}
+
+export function translateLoaderFactory(http: HttpClient) {
+    return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }

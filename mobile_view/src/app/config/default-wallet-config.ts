@@ -1,18 +1,21 @@
 import {createNewWalletConfig} from '../models/wallet-config';
+import {setLocaleSettingsByParam, SETTING_INSTALL_PARAM} from '../models/app-settings';
 
 const WalletConfigParamLabelMap = {
     plannedBudgetValue: 'Planned budget',
     plannedBudgetExpireDay: 'Planned expire date',
-    title: 'Wallet title'
+    title: 'Wallet title',
+    currency: 'Wallet Currency'
 };
 
 export enum WalletConfigParamEnum {
     plannedBudgetValue = 'plannedBudgetValue',
     plannedBudgetExpireDay = 'plannedBudgetExpireDay',
-    title = 'title'
+    title = 'title',
+    currency = 'currency'
 }
 
-function walletConfigParamValue(key: string): any {
+export function walletConfigParamValue(key: string): any {
     let value: any;
     Object.getOwnPropertyNames(WalletConfigParamLabelMap);
     switch (key) {
@@ -24,6 +27,9 @@ function walletConfigParamValue(key: string): any {
             break;
         case WalletConfigParamEnum.plannedBudgetExpireDay:
             value = new Date();
+            break;
+        case WalletConfigParamEnum.currency:
+            value = setLocaleSettingsByParam(SETTING_INSTALL_PARAM.currency);
             break;
         default:
             value = null;

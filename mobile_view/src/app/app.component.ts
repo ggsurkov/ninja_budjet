@@ -4,8 +4,9 @@ import {Platform} from '@ionic/angular';
 import {SplashScreen} from '@ionic-native/splash-screen';
 import {StatusBar} from '@ionic-native/status-bar';
 import {sideMenuConfig} from './config/side-menu-config';
-import {Storage} from '@ionic/storage';
 import {StorageService} from './storage/storage.service';
+import {TranslateService} from '@ngx-translate/core';
+import {AppSettings} from './models/app-settings';
 
 @Component({
     selector: 'app-root',
@@ -20,21 +21,25 @@ export class AppComponent {
         private splashScreen: SplashScreen,
         private statusBar: StatusBar,
         private storageService: StorageService,
-        private storage: Storage,
+        private translateService: TranslateService,
     ) {
         this.sideMenu();
         this.initializeApp();
     }
 
-    initializeApp() {
+    private initializeApp() {
         this.platform.ready().then(() => {
             this.statusBar.styleDefault();
             this.splashScreen.hide();
         });
         this.storageService.initDataApp({defaultMode: true});
+        this.translateService.setDefaultLang('english');
+        this.storageService.getObject('appSettings').then((appSettings: AppSettings) => {
+            this.translateService.use(appSettings.language);
+        });
     }
 
-    sideMenu() {
+    private sideMenu() {
         this.navigate = sideMenuConfig();
     }
 }

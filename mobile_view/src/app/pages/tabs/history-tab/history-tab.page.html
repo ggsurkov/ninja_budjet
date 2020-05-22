@@ -10,7 +10,7 @@
     </ion-toolbar>
   </ion-header>
   <ion-list>
-    <ion-list-header>Payments History</ion-list-header>
+    <ion-list-header>{{"Payments History" | translate}}</ion-list-header>
     <ion-item *ngFor="let payment of this.mainWallet?.history?.payments">
       <ion-label>{{payment.value}}</ion-label>
       <ion-note slot="end">{{payment.payTime}}</ion-note>

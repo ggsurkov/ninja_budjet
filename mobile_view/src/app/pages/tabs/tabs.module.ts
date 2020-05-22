@@ -8,6 +8,7 @@ import {TabsPageRoutingModule} from './tabs-routing.module';
 import {TabsPage} from './tabs.page';
 import {Tab1PageModule} from './money-tab/money-tab.module';
 import {Tab2PageModule} from './history-tab/history-tab.module';
+import {TranslateModule} from '@ngx-translate/core';
 
 export const SHARED_DATA = {data: 'sharedData'};
 
@@ -18,7 +19,8 @@ export const SHARED_DATA = {data: 'sharedData'};
         FormsModule,
         TabsPageRoutingModule,
         Tab1PageModule,
-        Tab2PageModule
+        Tab2PageModule,
+        TranslateModule
     ],
     declarations: [TabsPage]
 })
