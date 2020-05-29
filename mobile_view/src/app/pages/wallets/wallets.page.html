@@ -4,7 +4,7 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>
-      Wallets
+      {{'Wallets' | translate}}
     </ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="editWallet(mainWallet)" [disabled]="!mainWallet">
@@ -18,7 +18,7 @@
   <ion-list>
     <ion-radio-group #ionRadioGroup (ionChange)="chooseWallet($event.detail.value)" [value]="mainWallet?.guid">
       <ion-list-header>
-        <ion-label>Choose a Main Wallet</ion-label>
+        <ion-label>{{'Choose a Main Wallet' | translate}}</ion-label>
       </ion-list-header>
 
       <ion-item *ngFor="let wallet of wallets">

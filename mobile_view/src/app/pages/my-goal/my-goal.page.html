@@ -4,7 +4,7 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>
-      My goal
+      {{'My Goal' | translate}}
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -21,20 +21,24 @@
   </ion-item>
   <ion-list *ngIf="goal">
     <ion-list-header>
-      <ion-label>{{goal.currentValue === goal.wonValue ? 'Completed!' : 'Progress: '}} {{goal.currentValue + ' / ' + goal.wonValue}}</ion-label>
+      <ion-label>{{goal.currentValue === goal.wonValue ? 'Completed!' : 'Progress: ' | translate }} {{goal.currentValue + ' / ' + goal.wonValue}}</ion-label>
     </ion-list-header>
     <ion-progress-bar [value]="goalProgress"></ion-progress-bar>
   </ion-list>
   <ng-template #goalTutorial>
     <ion-item>
       <ion-label>
-        <h3>What is goal?</h3>
-        <p>You can save money more fun!</p>
-        <p>Goal can help you track how many money you save in each period from all wallets</p>
-        <p>And saved count you can reach to favorite thing: vacation, presents and etc</p>
-        <p>Just add value how many you want to save money and try improve your economy each period</p>
-        <p>Good luck!</p>
+        {{'What is goal ?' | translate}}
       </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-text class="text__gray-color">
+        <p>{{'You can save money more fun!' | translate}}</p>
+        <p>{{'Goal can help you track how many money you save in each period from all wallets' | translate}}</p>
+        <p>{{'And saved count you can reach to favorite thing: vacation, presents and etc' | translate}}</p>
+        <p>{{'Just add value how many you want to save money and try improve your economy each period' | translate}}</p>
+        <p>{{'Good luck!' | translate}}</p>
+      </ion-text>
     </ion-item>
   </ng-template>
 

@@ -9,13 +9,15 @@ import {WalletsPageRoutingModule} from './wallets-routing.module';
 import {WalletsPage} from './wallets.page';
 import {WalletModalPage} from './wallet-modal/wallet-modal.page';
 import {WalletConfigComponent} from '../../components/wallet-config/wallet-config.component';
+import {TranslateModule} from '@ngx-translate/core';
 
 @NgModule({
     imports: [
         CommonModule,
         FormsModule,
         IonicModule,
-        WalletsPageRoutingModule
+        WalletsPageRoutingModule,
+        TranslateModule
     ],
     entryComponents: [WalletModalPage],
     declarations: [WalletsPage, WalletModalPage, WalletConfigComponent]

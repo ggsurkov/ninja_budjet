@@ -17,7 +17,7 @@ export function createNewWallet(title?: string): Wallet {
         remainingDays: 0,
         history: {payments: []},
         config: {
-            title: title ? title : 'New Wallet', plannedBudgetValue: null, plannedBudgetExpireDay: null, currency: CurrencyType.DOLLAR_US,
+            title: title ? title : '', plannedBudgetValue: null, plannedBudgetExpireDay: null, currency: CurrencyType.DOLLAR_US,
         },
         guid: Guid.create().toString(),
     };

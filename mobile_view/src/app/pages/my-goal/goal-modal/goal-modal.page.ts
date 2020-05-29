@@ -10,7 +10,6 @@ import {Goal} from '../../../models/goal';
 
 export class GoalModalPage {
     @Input() public goal: Goal;
-    public modalTitle: string = 'Your Goal';
     public today: string;
 
     constructor(private modalCtrl: ModalController) {

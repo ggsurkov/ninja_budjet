@@ -4,7 +4,7 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>
-      Settings
+      {{'Settings' | translate}}
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -12,9 +12,9 @@
 <ion-content>
   <ion-list>
     <ion-item>
-      <ion-label>Language</ion-label>
+      <ion-label>{{'Language' | translate}}</ion-label>
       <ion-select (ionChange)="appSettingsChange()" [(ngModel)]="appSettings.language">
-        <ion-select-option *ngFor="let lang of languages" [value]="lang">{{lang}}</ion-select-option>
+        <ion-select-option *ngFor="let lang of languages" [value]="lang">{{lang | translate}}</ion-select-option>
       </ion-select>
     </ion-item>
     <!--    <ion-item>-->

@@ -18,7 +18,12 @@ export class WalletModalPage {
     }
 
     ionViewDidEnter(): void {
-        this.modalTitle = this.wallet.config.title;
+        if (!this.isNewWallet) {
+            this.modalTitle = this.wallet.config.title;
+        }
+        if (this.isNewWallet) {
+            this.modalTitle = 'New Wallet';
+        }
     }
 
     private dismissModal(): void {

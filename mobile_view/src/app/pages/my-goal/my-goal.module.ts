@@ -8,13 +8,15 @@ import {MyGoalPageRoutingModule} from './my-goal-routing.module';
 
 import {MyGoalPage} from './my-goal.page';
 import {GoalModalPage} from './goal-modal/goal-modal.page';
+import {TranslateModule} from '@ngx-translate/core';
 
 @NgModule({
     imports: [
         CommonModule,
         FormsModule,
         IonicModule,
-        MyGoalPageRoutingModule
+        MyGoalPageRoutingModule,
+        TranslateModule
     ],
     entryComponents: [GoalModalPage],
     declarations: [MyGoalPage, GoalModalPage]

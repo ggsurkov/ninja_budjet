@@ -1,6 +1,6 @@
 export enum CurrencyType {
-    RUBLE = 'ruble',
-    DOLLAR_US = 'dollar'
+    RUBLE = 'Ruble',
+    DOLLAR_US = 'Dollar'
 }
 
 export const CURRENCY_TITLES = [CurrencyType.RUBLE, CurrencyType.DOLLAR_US];

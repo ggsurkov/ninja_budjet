@@ -1,15 +1,15 @@
 <ion-list>
   <ion-list-header>
-    <ion-label>Config</ion-label>
+    <ion-label>{{'Config' | translate}}</ion-label>
   </ion-list-header>
 
   <ion-item *ngFor="let walletParam of this.defaultWalletConfigKeys">
-    <ion-label>{{walletParam.label}}</ion-label>
+    <ion-label>{{walletParam.label | translate}}</ion-label>
     <ion-input
         (ngModelChange)="handleChange($event, walletParam.paramName)"
         *ngIf="walletParam.paramName === walletConfigParamEnum.title"
         [(ngModel)]="wallet.config[walletParam.paramName]"
-        [placeholder]="walletParam.value"
+        [placeholder]="walletParam.value | translate"
         type="text">
     </ion-input>
     <ion-select
@@ -17,19 +17,19 @@
         *ngIf="walletParam.paramName === walletConfigParamEnum.currency"
         [(ngModel)]="wallet.config[walletParam.paramName]"
         [disabled]="!isNewWallet"
-        [placeholder]="walletParam.value">
-      <ion-select-option *ngFor="let curr of currency" [value]="curr">{{curr}}</ion-select-option>
+        [placeholder]="walletParam.value | translate">
+      <ion-select-option *ngFor="let curr of currency" [value]="curr">{{curr | translate}}</ion-select-option>
     </ion-select>
     <ion-input
         *ngIf="walletParam.paramName === walletConfigParamEnum.plannedBudgetValue"
         (ngModelChange)="handleChange($event, walletParam.paramName)"
         [(ngModel)]="wallet.config[walletParam.paramName]"
-        [placeholder]="walletParam.value"
+        [placeholder]="walletParam.value | translate"
         type="number">
     </ion-input>
     <ion-datetime *ngIf="walletParam.paramName === walletConfigParamEnum.plannedBudgetExpireDay"
                   (ionChange)="handleDateChange($event, walletParam.paramName)"
-                  [placeholder]="walletParam.value" [value]="wallet.config[walletParam.paramName]">
+                  [placeholder]="walletParam.value | translate" [value]="wallet.config[walletParam.paramName]">
     </ion-datetime>
   </ion-item>
 </ion-list>

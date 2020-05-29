@@ -1,34 +1,34 @@
 <ion-header translucent>
   <ion-toolbar>
-    <ion-title>Edit {{modalTitle}}</ion-title>
+    <ion-title>{{'My Goal' | translate}}</ion-title>
     <ion-buttons slot="end">
-      <ion-button (click)="dismissModal()">Close</ion-button>
+      <ion-button (click)="dismissModal()">{{'Close' | translate}}</ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content fullscreen>
   <ion-item>
-    <ion-label>Name</ion-label>
+    <ion-label>{{'Name' | translate}}</ion-label>
     <ion-input
         [(ngModel)]="goal.name"
-        [placeholder]="'Vacation'"
+        [placeholder]="'Vacation' | translate"
         type="text">
     </ion-input>
   </ion-item>
   <ion-item>
-    <ion-label>Value</ion-label>
+    <ion-label>{{'Value' | translate}}</ion-label>
     <ion-input
         [(ngModel)]="goal.wonValue"
-        [placeholder]="'For example: 3000$'"
+        [placeholder]="'For example: 3000$' | translate"
         type="number">
     </ion-input>
   </ion-item>
   <ion-item>
-    <ion-label>Description</ion-label>
+    <ion-label>{{'Description' | translate}}</ion-label>
     <ion-textarea
         [(ngModel)]="goal.info"
-        [placeholder]="'Example: Surfing in Portugal!'"
+        [placeholder]="'Example: Surfing in Portugal!' | translate"
         type="text">
     </ion-textarea>
   </ion-item>
@@ -37,7 +37,7 @@
 <ion-footer>
   <ion-toolbar>
     <ion-buttons class="ion-justify-content-around">
-      <ion-button (click)="toCreate()">Save</ion-button>
+      <ion-button (click)="toCreate()">{{'Save' | translate}}</ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-footer>

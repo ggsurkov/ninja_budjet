@@ -5,6 +5,7 @@ import {FormsModule} from '@angular/forms';
 import {IonicModule} from '@ionic/angular';
 import {FamilyRoutingModule} from './family-routing.module';
 import {FamilyPage} from './family.page';
+import {TranslateModule} from '@ngx-translate/core';
 
 
 @NgModule({
@@ -12,7 +13,8 @@ import {FamilyPage} from './family.page';
         CommonModule,
         FormsModule,
         IonicModule,
-        FamilyRoutingModule
+        FamilyRoutingModule,
+        TranslateModule
     ],
     declarations: [FamilyPage]
 })

@@ -14,7 +14,7 @@ import {IonicStorageModule} from '@ionic/storage';
 import {StorageService} from './storage/storage.service';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
-import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
+import {TranslateLoader, TranslateModule, TranslatePipe} from '@ngx-translate/core';
 
 
 @NgModule({
@@ -39,6 +39,7 @@ import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
         SplashScreen,
         Keyboard,
         StorageService,
+        TranslatePipe,
         {provide: RouteReuseStrategy, useClass: IonicRouteStrategy}
     ],
     bootstrap: [AppComponent]
