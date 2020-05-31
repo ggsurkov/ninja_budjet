@@ -38,5 +38,12 @@
   "Ruble": "Рубль",
   "Dollar": "Доллар",
   "russian": "русский",
-  "english": "английский"
+  "english": "английский",
+  "Please, to authorize before viewing family token": "Пожалуйста, авторизуйтесь перед просмотром семейного токена",
+  "Auth by Facebook": "Facebook авторизация",
+  "Auth by Google": "Google авторизация",
+  "Create Family Token": "Создать Семейный Токен",
+  "Share": "Отправить",
+  "Or you can add Family token from your spouse": "Или вы можете вставить Семейный Токен своего супруга(ги)",
+  "Family Token": "Семейный токен: "
 }

@@ -10,5 +10,44 @@
 </ion-header>
 
 <ion-content>
+  <ion-list>
+    <ion-item>
+      <ion-text
+          *ngIf="!user?.familyToken && !user?.isAuthorized">{{'Please, to authorize before viewing family token' | translate}}</ion-text>
+      <ion-button (click)="createFamilyToken()" [disabled]="!user?.isAuthorized">
+        {{'Create Family Token' | translate}}
+      </ion-button>
+    </ion-item>
 
+    <ion-item *ngIf="!user?.familyToken && user?.isAuthorized">
+      <ion-text>{{'You can add Family token from your spouse' | translate}}</ion-text>
+    </ion-item>
+    <ion-item *ngIf="!user?.familyToken && user?.isAuthorized">
+      <ion-input #familyTokenInput [placeholder]="'Put here'"></ion-input>
+      <ion-button (click)="saveFamilyToken(familyTokenInput.value)">
+        {{'Save' | translate}}
+      </ion-button>
+    </ion-item>
+
+
+    <ion-item *ngIf="!user?.isAuthorized">
+      <ion-button (click)="authByFacebook()">
+        {{'Auth by Facebook' | translate}}
+      </ion-button>
+    </ion-item>
+
+    <ion-item *ngIf="!user?.isAuthorized">
+      <ion-button (click)="authByGoogle()">
+        {{'Auth by Google' | translate}}
+      </ion-button>
+    </ion-item>
+
+    <ion-item *ngIf="user?.familyToken && user?.isAuthorized">
+      <ion-label>{{'Family Token: ' | translate}}</ion-label>
+      <ion-text>{{user?.familyToken}}</ion-text>
+      <ion-button (click)="socialShare()">
+        {{'Share' | translate}}
+      </ion-button>
+    </ion-item>
+  </ion-list>
 </ion-content>
