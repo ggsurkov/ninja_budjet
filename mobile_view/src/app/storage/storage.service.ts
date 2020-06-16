@@ -71,6 +71,23 @@ export class StorageService {
         this.storage.clear();
     }
 
+    public updateObjectByParams(objectName: string, params: any[]) {
+        try {
+            this.getObject(objectName).then((updatedObject: any) => {
+                params.forEach((param) => {
+                    updatedObject[param.key] = param.value;
+                });
+                this.setObject(objectName, updatedObject).then(() => {
+                    console.log(objectName + ' updated successfully!', updatedObject);
+                    return null;
+                });
+            });
+        } catch (reason) {
+            console.log(reason);
+            return null;
+        }
+    }
+
     public async saveMainWallet(wallet: Wallet): Promise<any> {
         try {
             this.setObject('mainWallet', wallet).then(() => {
@@ -116,5 +133,6 @@ export class StorageService {
             this.setObject('appSettings', initDefaultAppSettings());
         }
     }
+
 
 }

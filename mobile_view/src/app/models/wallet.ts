@@ -5,20 +5,25 @@ import {CurrencyType} from '../dictionary/currency-type';
 
 export interface Wallet {
     value: number;
-    remainingDays: number;
     history: WalletHistory;
     config: WalletConfig;
     guid: string;
+    plannedDayBudgetValue: number;
+    lastEnterDate: string;
 }
 
 export function createNewWallet(title?: string): Wallet {
     return {
-        value: 0,
-        remainingDays: 0,
+        value: 10000,
         history: {payments: []},
         config: {
-            title: title ? title : '', plannedBudgetValue: null, plannedBudgetExpireDay: null, currency: CurrencyType.DOLLAR_US,
+            title: title ? title : '',
+            plannedBudgetValue: 10000,
+            plannedBudgetExpireDay: new Date().toLocaleDateString(),
+            currency: CurrencyType.DOLLAR_US,
         },
         guid: Guid.create().toString(),
+        plannedDayBudgetValue: 0,
+        lastEnterDate: new Date().toLocaleDateString(),
     };
 }

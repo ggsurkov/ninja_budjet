@@ -8,7 +8,6 @@ import {replaceInArrayByParam} from '../../utils/replace-in-array.util';
 import {toCopy} from '../../utils/to-copy.util';
 import {StorageService} from '../../storage/storage.service';
 
-
 @Component({
     selector: 'app-wallets',
     templateUrl: './wallets.page.html',

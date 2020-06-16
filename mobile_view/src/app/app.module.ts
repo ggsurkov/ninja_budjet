@@ -16,7 +16,8 @@ import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {TranslateLoader, TranslateModule, TranslatePipe} from '@ngx-translate/core';
 import {SocialSharing} from '@ionic-native/social-sharing';
-
+import {SideMenuService} from './services/side-menu-service.service';
+import {EveryDayUpdateService} from './services/every-day-update.service';
 
 @NgModule({
     declarations: [AppComponent],
@@ -42,6 +43,8 @@ import {SocialSharing} from '@ionic-native/social-sharing';
         StorageService,
         SocialSharing,
         TranslatePipe,
+        SideMenuService,
+        EveryDayUpdateService,
         {provide: RouteReuseStrategy, useClass: IonicRouteStrategy}
     ],
     bootstrap: [AppComponent]

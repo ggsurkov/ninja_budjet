@@ -11,8 +11,12 @@
 <ion-content>
   <ion-grid>
     <ion-row>
-      <ion-col>{{"Budget for" | translate}} 30дн</ion-col>
-      <ion-col class="ion-text-end">{{plannedBudget}}</ion-col>
+      <ion-col>{{"Remaining days" | translate}}</ion-col>
+      <ion-col class="ion-text-end">{{this.remainingDays}}</ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>{{"Budget for" | translate}}</ion-col>
+      <ion-col class="ion-text-end">{{mainWallet?.value}}</ion-col>
     </ion-row>
     <ion-row>
       <ion-col>{{"For today" | translate}}</ion-col>

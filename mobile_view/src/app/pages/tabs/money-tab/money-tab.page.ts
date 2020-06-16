@@ -4,6 +4,7 @@ import {Wallet} from '../../../models/wallet';
 import {Events} from '@ionic/angular';
 import {StorageService} from '../../../storage/storage.service';
 import {createNewPayment, Payment} from '../../../models/payment';
+import {EveryDayUpdateService} from '../../../services/every-day-update.service';
 
 @Component({
     selector: 'money-tab',
@@ -13,18 +14,32 @@ import {createNewPayment, Payment} from '../../../models/payment';
 export class MoneyTabPage {
     private writeOffMoneyCount: number;
     private writeOffMoneyString: string = '0';
-    private plannedBudget: number = 15000;
-    private plannedBudgetDay: number = 500;
+    public remainingDays: number;
     public mainWallet: Wallet;
     public currentPayment: Payment = null;
+    public periodIsExpired: boolean;
+    private plannedBudgetDay: number;
 
-    constructor(public router: Router, public events: Events, private storageService: StorageService) {
+    constructor(public router: Router,
+                public events: Events,
+                private storageService: StorageService,
+                private everyDayUpdateService: EveryDayUpdateService
+    ) {
     }
 
     ionViewDidEnter(): void {
         this.storageService.getObject('mainWallet').then((data: Wallet) => {
             this.mainWallet = data;
+            // this.everyDayUpdateService.checkAndSetLastEnterDate().then(() => {
+            //
+            // })
+            this.remainingDays = this.everyDayUpdateService.getRemainingDays(this.mainWallet.config.plannedBudgetExpireDay);
+            this.plannedBudgetDay = this.mainWallet.value / this.remainingDays;
+            if (this.remainingDays <= 0) {
+                this.periodIsExpired = true;
+            }
         });
+
     }
 
     public calculateNumber(keyNumber: string): void {
@@ -49,7 +64,7 @@ export class MoneyTabPage {
             return;
         }
         const writeOffMoneyCount = parseFloat(this.writeOffMoneyString);
-        this.plannedBudget -= writeOffMoneyCount;
+        this.mainWallet.value -= writeOffMoneyCount;
         this.plannedBudgetDay -= writeOffMoneyCount;
         this.createPayment(writeOffMoneyCount);
     }
@@ -62,7 +77,7 @@ export class MoneyTabPage {
     }
 
     public returnPayment(): void {
-        this.plannedBudget += this.currentPayment.value;
+        this.mainWallet.value += this.currentPayment.value;
         this.plannedBudgetDay += this.currentPayment.value;
         this.deletePayment(this.currentPayment);
     }

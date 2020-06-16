@@ -14,7 +14,7 @@ export interface AppSettings {
 export function initDefaultAppSettings() {
     return {
         language: setLocaleSettingsByParam(SETTING_INSTALL_PARAM.lang),
-        currency: setLocaleSettingsByParam(SETTING_INSTALL_PARAM.currency)
+        currency: setLocaleSettingsByParam(SETTING_INSTALL_PARAM.currency),
     };
 }
 

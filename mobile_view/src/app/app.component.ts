@@ -6,6 +6,7 @@ import {StatusBar} from '@ionic-native/status-bar';
 import {StorageService} from './storage/storage.service';
 import {TranslateService} from '@ngx-translate/core';
 import {AppSettings} from './models/app-settings';
+import {SideMenuService} from './services/side-menu-service.service';
 
 @Component({
     selector: 'app-root',
@@ -21,6 +22,7 @@ export class AppComponent {
         private statusBar: StatusBar,
         private storageService: StorageService,
         private translateService: TranslateService,
+        private sideMenuService: SideMenuService
     ) {
         this.initializeApp();
         this.initSideMenu();
@@ -38,62 +40,10 @@ export class AppComponent {
         });
     }
 
-    private initSideMenu() {
-        this.translateSideMenu();
-    }
-
-    private translateSideMenu() {
-        let home: string = '';
-        let wallets: string = '';
-        let myGoal: string = '';
-        let family: string = '';
-        let settings: string = '';
-        this.translateService.get(['Home']).subscribe(translation => {
-            home = translation['Home'];
+    public initSideMenu() {
+        this.sideMenuService.translateSideMenu().then((data) => {
+            this.sideMenuNavigatePages = data;
         });
-        this.translateService.get(['Wallets']).subscribe(translation => {
-            wallets = translation['Wallets'];
-        });
-        this.translateService.get(['My Goal']).subscribe(translation => {
-            myGoal = translation['My Goal'];
-        });
-        this.translateService.get(['Family']).subscribe(translation => {
-            family = translation['Family'];
-        });
-        this.translateService.get(['Settings']).subscribe(translation => {
-            settings = translation['Settings'];
-            this.setSideMenu(home, wallets, myGoal, family, settings);
-        });
-    }
-
-    private setSideMenu(home, wallets, myGoal, family, settings) {
-        this.sideMenuNavigatePages = [
-            {
-                title: home,
-                url: '',
-                icon: 'home'
-            },
-            {
-                title: wallets,
-                url: '/wallets',
-                icon: 'albums'
-            },
-            {
-                title: myGoal,
-                url: '/my-goal',
-                icon: 'contract'
-            },
-            {
-                title: family,
-                url: '/family',
-                icon: 'contacts'
-            },
-            {
-                title: settings,
-                url: '/settings',
-                icon: 'hammer'
-            },
-        ];
     }
 
 }
