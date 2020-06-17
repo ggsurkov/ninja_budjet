@@ -16,11 +16,20 @@ export class EveryDayUpdateService {
         return this.momentjs(plannedExpiredDay).diff(today, 'days');
     }
 
-    public checkAndSetLastEnterDate(mainWallet: Wallet): Promise<boolean> {
-        return new Promise<boolean>((resolve, reject) => {
+    public needToUpdatePlannedDayBudget(mainWallet: Wallet): boolean {
+        const today: string = new Date().toLocaleDateString();
+        return this.momentjs(mainWallet.lastEnterDate).diff(today, 'days') !== 0 ||
+            mainWallet.previousUpdatedPlannedBudgetExpireDay !== mainWallet.config.plannedBudgetExpireDay;
+    }
+
+    public updatePlannedDayBudget(mainWallet: Wallet, remainingDays: number): Promise<Wallet> {
+        return new Promise<Wallet>((resolve, reject) => {
             const today: string = new Date().toLocaleDateString();
-            const lastEnterDateNotEqualToday: boolean = this.momentjs(mainWallet.lastEnterDate).diff(today, 'days') !== 0;
-            resolve(lastEnterDateNotEqualToday);
+            mainWallet.lastEnterDate = today;
+            mainWallet.previousUpdatedPlannedBudgetExpireDay = mainWallet.config.plannedBudgetExpireDay;
+            mainWallet.plannedDayBudgetValue = mainWallet.value / remainingDays;
+            this.storageService.saveMainWallet(mainWallet);
+            resolve(mainWallet);
         });
     }
 }

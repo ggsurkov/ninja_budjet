@@ -8,8 +8,9 @@ export interface Wallet {
     history: WalletHistory;
     config: WalletConfig;
     guid: string;
-    plannedDayBudgetValue: number;
     lastEnterDate: string;
+    plannedDayBudgetValue: number;
+    previousUpdatedPlannedBudgetExpireDay: string;
 }
 
 export function createNewWallet(title?: string): Wallet {
@@ -25,5 +26,6 @@ export function createNewWallet(title?: string): Wallet {
         guid: Guid.create().toString(),
         plannedDayBudgetValue: 0,
         lastEnterDate: new Date().toLocaleDateString(),
+        previousUpdatedPlannedBudgetExpireDay: new Date().toLocaleDateString(),
     };
 }

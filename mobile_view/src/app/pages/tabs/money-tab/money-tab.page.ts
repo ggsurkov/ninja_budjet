@@ -17,8 +17,7 @@ export class MoneyTabPage {
     public remainingDays: number;
     public mainWallet: Wallet;
     public currentPayment: Payment = null;
-    public periodIsExpired: boolean;
-    private plannedBudgetDay: number;
+    private plannedDayBudgetValue: number;
 
     constructor(public router: Router,
                 public events: Events,
@@ -28,18 +27,7 @@ export class MoneyTabPage {
     }
 
     ionViewDidEnter(): void {
-        this.storageService.getObject('mainWallet').then((data: Wallet) => {
-            this.mainWallet = data;
-            // this.everyDayUpdateService.checkAndSetLastEnterDate().then(() => {
-            //
-            // })
-            this.remainingDays = this.everyDayUpdateService.getRemainingDays(this.mainWallet.config.plannedBudgetExpireDay);
-            this.plannedBudgetDay = this.mainWallet.value / this.remainingDays;
-            if (this.remainingDays <= 0) {
-                this.periodIsExpired = true;
-            }
-        });
-
+        this.updateWalletInfo();
     }
 
     public calculateNumber(keyNumber: string): void {
@@ -64,8 +52,7 @@ export class MoneyTabPage {
             return;
         }
         const writeOffMoneyCount = parseFloat(this.writeOffMoneyString);
-        this.mainWallet.value -= writeOffMoneyCount;
-        this.plannedBudgetDay -= writeOffMoneyCount;
+        this.calculateValue(writeOffMoneyCount);
         this.createPayment(writeOffMoneyCount);
     }
 
@@ -78,7 +65,7 @@ export class MoneyTabPage {
 
     public returnPayment(): void {
         this.mainWallet.value += this.currentPayment.value;
-        this.plannedBudgetDay += this.currentPayment.value;
+        this.plannedDayBudgetValue += this.currentPayment.value;
         this.deletePayment(this.currentPayment);
     }
 
@@ -98,5 +85,31 @@ export class MoneyTabPage {
         this.storageService.deletePaymentByGuid(payment.guid).then(() => {
             this.currentPayment = null;
         });
+    }
+
+    private updateWalletInfo(): void {
+        this.storageService.getObject('mainWallet').then((data: Wallet) => {
+            this.mainWallet = data;
+            this.remainingDays = this.everyDayUpdateService.getRemainingDays(this.mainWallet.config.plannedBudgetExpireDay);
+            if (this.everyDayUpdateService.needToUpdatePlannedDayBudget(this.mainWallet)) {
+                this.everyDayUpdateService.updatePlannedDayBudget(this.mainWallet, this.remainingDays).then((wallet: Wallet) => {
+                    this.mainWallet = wallet;
+                });
+            }
+        });
+    }
+
+    private calculateValue(writeOffMoneyCount: number) {
+        // if (writeOffMoneyCount > this.mainWallet.value || Math.sign(this.mainWallet.value)) {
+        //     this.mainWallet.value -= writeOffMoneyCount;
+        // }
+        // if (writeOffMoneyCount > this.plannedDayBudgetValue) {
+        //
+        // }
+        // if (writeOffMoneyCount) {
+        //
+        // }
+        this.mainWallet.value -= writeOffMoneyCount;
+        this.plannedDayBudgetValue -= writeOffMoneyCount;
     }
 }
